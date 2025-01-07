@@ -1,5 +1,39 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Gallery from '../components/Gallery';
+
+const homeGalleryImages = [
+  {
+    src: "/mosq_entrance.jpg",
+    alt: "Hassan II Mosque",
+    description: "The grand entrance of Hassan II Mosque in Casablanca"
+  },
+  {
+    src: "/local_kitchen.jpg",
+    alt: "Traditional Kitchen",
+    description: "Learn authentic Moroccan cooking in local homes"
+  },
+  {
+    src: "/desert.JPG",
+    alt: "Sahara Desert",
+    description: "The endless dunes of the Sahara Desert"
+  },
+  {
+    src: "/mountain_town.jpg",
+    alt: "Mountain Village",
+    description: "Traditional villages nestled in the Atlas Mountains"
+  },
+  {
+    src: "/local_spices.jpg",
+    alt: "Spice Market",
+    description: "Vibrant spice markets full of colors and aromas"
+  },
+  {
+    src: "/traditional_outfit.JPG",
+    alt: "Traditional Dress",
+    description: "Experience Morocco's rich cultural heritage"
+  }
+];
 
 export default function Home() {
   return (
@@ -21,6 +55,19 @@ export default function Home() {
               Discover More
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="py-24 px-4">
+        <div className="max-w-4xl mx-auto space-y-8">
+          <h2 className="text-3xl md:text-4xl font-semibold">
+            Glimpses of Morocco
+          </h2>
+          <p className="text-lg text-muted">
+            From ancient medinas to Saharan dunes, discover the diverse landscapes and rich culture of Morocco.
+          </p>
+          <Gallery images={homeGalleryImages} compact />
         </div>
       </section>
 

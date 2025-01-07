@@ -37,3 +37,83 @@ body {
     transform: translateY(0);
   }
 }
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.timeline-container {
+  position: relative;
+  padding: 1rem 0;
+}
+
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    #1d4ed8,
+    #60a5fa
+  );
+  transform: translateX(-50%);
+  animation: timelineGrow 1.5s ease-out forwards;
+  transform-origin: top;
+  opacity: 0.8;
+}
+
+.timeline-item {
+  position: relative;
+  margin: 1rem 0;
+  width: 100%;
+  padding-top: 0.5rem;
+}
+
+.timeline-left {
+  padding-right: 50%;
+}
+
+.timeline-right {
+  padding-left: 50%;
+  margin-left: auto;
+}
+
+.timeline-point {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: var(--background);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  transform: translate(-50%, 0.75rem);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-content {
+  position: relative;
+  width: 100%;
+  padding: 0 1.5rem;
+}
+
+@keyframes timelineGrow {
+  from {
+    transform: translateX(-50%) scaleY(0);
+  }
+  to {
+    transform: translateX(-50%) scaleY(1);
+  }
+}

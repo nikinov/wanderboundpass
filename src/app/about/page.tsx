@@ -1,5 +1,49 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import Gallery from '../../components/Gallery';
+
+const aboutGalleryImages = [
+  {
+    src: "/desert_person.JPG",
+    alt: "Desert Guide",
+    description: "Local guides sharing their deep connection with the Sahara"
+  },
+  {
+    src: "/waterfall.jpg",
+    alt: "Atlas Waterfall",
+    description: "Hidden waterfalls in the High Atlas Mountains"
+  },
+  {
+    src: "/meat_dish.JPG",
+    alt: "Traditional Tagine",
+    description: "Savor authentic Moroccan cuisine"
+  },
+  {
+    src: "/mosq_columns.jpg",
+    alt: "Mosque Architecture",
+    description: "Stunning Islamic architecture and detailed craftsmanship"
+  },
+  {
+    src: "/waterfall.jpg",
+    alt: "Mountain Waterfall",
+    description: "Natural wonders tucked away in Morocco's valleys"
+  },
+  {
+    src: "/stone_beach.jpg",
+    alt: "Coastal Landscape",
+    description: "Morocco's dramatic Atlantic coastline"
+  },
+  {
+    src: "/town_view.JPG",
+    alt: "City Vista",
+    description: "Panoramic views of ancient Moroccan cities"
+  },
+  {
+    src: "/local_disert.jpg",
+    alt: "Desert Experience",
+    description: "Authentic desert experiences beyond the tourist trail"
+  }
+];
 
 export default function About() {
   return (
@@ -33,6 +77,12 @@ export default function About() {
               culinary adventures in local homes, or desert expeditions under 
               starlit skies, let me show you the Morocco I've come to know and love.
             </p>
+          </div>
+
+          {/* Gallery Section */}
+          <div className="pt-16">
+            <h2 className="text-3xl font-semibold mb-8">Morocco Through My Lens</h2>
+            <Gallery images={aboutGalleryImages} />
           </div>
 
           {/* CTA Section */}
