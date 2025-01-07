@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { GeistSans } from 'geist/font/sans';
 import "./globals.css";
-
-const geist = Geist({
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Wander Bound Pass",
@@ -17,8 +13,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${geist.className} antialiased`}>
+    <html lang="en" className={`dark ${GeistSans.className}`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>
