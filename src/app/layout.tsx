@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { GeistSans } from 'geist/font/sans';
+import { Geist } from "next/font/google";
 import "./globals.css";
+import Header from '@/components/Header';
+
+const geist = Geist({
+  variable: "--font-geist",
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export const metadata: Metadata = {
-  title: "Wander Bound Pass",
-  description: "Your journey begins soon",
+  title: "WanderPass Bound | Journey Deeper, Live Richer",
+  description: "Discover Morocco's hidden treasures through authentic local experiences",
 };
 
 export default function RootLayout({
@@ -13,9 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${GeistSans.className}`}>
-      <body className="antialiased">
-        {children}
+    <html lang="en" className={geist.variable} suppressHydrationWarning>
+      <head />
+      <body suppressHydrationWarning>
+        <div className="antialiased bg-background text-foreground">
+          <Header />
+          <main className="pt-16">
+            {children}
+          </main>
+        </div>
       </body>
     </html>
   );
