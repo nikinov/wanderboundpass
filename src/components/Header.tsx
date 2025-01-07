@@ -6,20 +6,12 @@ import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isToursOpen, setIsToursOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
+  // Close menu when pathname changes
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsToursOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+    setIsOpen(false);
+  }, [pathname]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -39,40 +31,19 @@ const Header = () => {
               Home
             </Link>
             
-            <div ref={dropdownRef} className="relative">
-              <button
-                className={`flex items-center gap-1 hover:text-accent transition-colors ${isToursOpen ? 'text-accent' : ''}`}
-                onClick={() => setIsToursOpen(!isToursOpen)}
-                onMouseEnter={() => setIsToursOpen(true)}
-              >
-                Tours
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              
-              {isToursOpen && (
-                <div 
-                  className="absolute top-full left-0 mt-2 w-48 bg-background border border-foreground/10 rounded-md shadow-lg"
-                  onMouseLeave={() => setIsToursOpen(false)}
-                >
-                  <Link 
-                    href="/tours/spring"
-                    className="block px-4 py-2 hover:bg-accent/5 transition-colors"
-                    onClick={() => setIsToursOpen(false)}
-                  >
-                    Spring Tours
-                  </Link>
-                  <Link 
-                    href="/tours/fall"
-                    className="block px-4 py-2 hover:bg-accent/5 transition-colors"
-                    onClick={() => setIsToursOpen(false)}
-                  >
-                    Fall Tours
-                  </Link>
-                </div>
-              )}
-            </div>
+            <Link 
+              href="/tours/spring"
+              className={`hover:text-accent transition-colors ${pathname === '/tours/spring' ? 'text-accent' : ''}`}
+            >
+              Spring Tours
+            </Link>
+            
+            <Link 
+              href="/tours/fall"
+              className={`hover:text-accent transition-colors ${pathname === '/tours/fall' ? 'text-accent' : ''}`}
+            >
+              Fall Tours
+            </Link>
 
             <Link 
               href="/about"
@@ -130,35 +101,19 @@ const Header = () => {
                 Home
               </Link>
               
-              {/* Mobile Tours Dropdown */}
-              <div>
-                <button
-                  onClick={() => setIsToursOpen(!isToursOpen)}
-                  className="flex items-center w-full px-3 py-2 rounded-md hover:bg-accent/5 transition-colors"
-                >
-                  Tours
-                  <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                
-                {isToursOpen && (
-                  <div className="pl-4">
-                    <Link
-                      href="/tours/spring"
-                      className="block px-3 py-2 rounded-md hover:bg-accent/5 transition-colors"
-                    >
-                      Spring Tours
-                    </Link>
-                    <Link
-                      href="/tours/fall"
-                      className="block px-3 py-2 rounded-md hover:bg-accent/5 transition-colors"
-                    >
-                      Fall Tours
-                    </Link>
-                  </div>
-                )}
-              </div>
+              <Link
+                href="/tours/spring"
+                className="block px-3 py-2 rounded-md hover:bg-accent/5 transition-colors"
+              >
+                Spring Tours
+              </Link>
+              
+              <Link
+                href="/tours/fall"
+                className="block px-3 py-2 rounded-md hover:bg-accent/5 transition-colors"
+              >
+                Fall Tours
+              </Link>
 
               <Link
                 href="/about"
