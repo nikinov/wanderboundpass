@@ -1,13 +1,25 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isToursOpen, setIsToursOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsToursOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -15,12 +27,10 @@ const Header = () => {
     <header className="fixed w-full bg-background/80 backdrop-blur-md z-50 border-b border-foreground/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <Link href="/" className="font-semibold text-lg">
             WanderPass Bound
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <Link 
               href="/"
@@ -29,15 +39,11 @@ const Header = () => {
               Home
             </Link>
             
-            {/* Tours Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setIsToursOpen(true)}
-              onMouseLeave={() => setIsToursOpen(false)}
-            >
+            <div ref={dropdownRef} className="relative">
               <button
-                className="flex items-center gap-1 hover:text-accent transition-colors"
+                className={`flex items-center gap-1 hover:text-accent transition-colors ${isToursOpen ? 'text-accent' : ''}`}
                 onClick={() => setIsToursOpen(!isToursOpen)}
+                onMouseEnter={() => setIsToursOpen(true)}
               >
                 Tours
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -46,16 +52,21 @@ const Header = () => {
               </button>
               
               {isToursOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-background border border-foreground/10 rounded-md shadow-lg">
+                <div 
+                  className="absolute top-full left-0 mt-2 w-48 bg-background border border-foreground/10 rounded-md shadow-lg"
+                  onMouseLeave={() => setIsToursOpen(false)}
+                >
                   <Link 
                     href="/tours/spring"
                     className="block px-4 py-2 hover:bg-accent/5 transition-colors"
+                    onClick={() => setIsToursOpen(false)}
                   >
                     Spring Tours
                   </Link>
                   <Link 
                     href="/tours/fall"
                     className="block px-4 py-2 hover:bg-accent/5 transition-colors"
+                    onClick={() => setIsToursOpen(false)}
                   >
                     Fall Tours
                   </Link>
