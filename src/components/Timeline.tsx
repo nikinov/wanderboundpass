@@ -30,7 +30,7 @@ const Timeline: React.FC<TimelineProps> = ({ events }) => {
           <div
             key={index}
             className={`timeline-item opacity-0 animate-fadeIn ${
-              index % 2 === 0 ? 'timeline-left' : 'timeline-right'
+              index % 2 === 0 ? 'md:timeline-left' : 'md:timeline-right'
             }`}
             style={{ animationDelay: `${index * 0.2}s` }}
           >

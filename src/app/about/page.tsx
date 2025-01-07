@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import Gallery from '../../components/Gallery';
+import AboutFeatures from '@/components/AboutFeatures';
 
 const aboutGalleryImages = [
   {
@@ -80,6 +81,11 @@ export default function About() {
           </div>
 
           {/* Gallery Section */}
+          <div className="pt-16">
+            <h2 className="text-3xl font-semibold mb-8">The Experience</h2>
+            <AboutFeatures />
+          </div>
+
           <div className="pt-16">
             <h2 className="text-3xl font-semibold mb-8">Morocco Through My Lens</h2>
             <Gallery images={aboutGalleryImages} />
