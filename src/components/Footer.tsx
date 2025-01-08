@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
         
         <div className="text-center text-sm text-muted mt-8 pt-8 border-t border-foreground/10">
-          © {new Date().getFullYear()} Moroccan Journey. All rights reserved.
+          © {new Date().getFullYear()} Wanderbound Pass. All rights reserved.
         </div>
       </div>
     </footer>
